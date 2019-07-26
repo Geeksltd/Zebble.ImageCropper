@@ -1,4 +1,4 @@
-[logo]: https://raw.githubusercontent.com/Geeksltd/Zebble.ImageCropper/master/Shared/NuGet/Icon.png "Zebble.ImageCropper"
+[logo]: https://raw.githubusercontent.com/Geeksltd/ImageCropper/master/Shared/NuGet/Icon.png "Zebble.ImageCropper"
 
 ## Zebble.ImageCropper
 
@@ -40,10 +40,9 @@ await ImageCropper.Show(ImageCropperSettings.CropShapeType.Oval, ImageCropperSet
 ##### Using a file
 
 ```csharp
-await ImageCropper.Show(ImageCropperSettings.CropShapeType.Rectangle, ImageCropperSettings.Media.TakePhoto);
-// Or
-await ImageCropper.Show(ImageCropperSettings.CropShapeType.Oval, ImageCropperSettings.Media.TakePhoto);
+await ImageCropper.Show(imagefile);
 ```
+
 <br>
 
 ##### Accessing the output file
