@@ -71,6 +71,7 @@ namespace Zebble
         {
             try
             {
+                if (Settings == null) Settings = new ImageCropperSettings();
                 if (Settings.ImageFile == null)
                 {
                     switch (Settings.MediaSource)
