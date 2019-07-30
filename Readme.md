@@ -23,6 +23,21 @@ To use ImageCropper in your Zebble application you can use below code to show th
 await ImageCropper.Show();
 ```
 
+Also, you can change the Cropper setting like below:
+
+```csharp
+ImageCropper.Settings = new ImageCropperSettings
+{
+    AspectRatioX = aspectRatioX,
+    AspectRatioY = aspecRatioY,
+    CropShape = cropShapeType,
+    MediaSource = mediaSource,
+    MediaCaptureSettings = new Device.MediaCaptureSettings(),
+    ImageFile = null,
+    PageTitle = "Page Title",
+};
+```
+
 ##### Picking Photo from the Gallary
 
 ```csharp
