@@ -31,9 +31,9 @@
   </metadata>
   <files>
     <file src="..\..\lib\Zebble.ImageCropper.iOS.*" target="lib\Xamarin.iOS10\" />
-    <file src="..\..\Binding\TOCropViewController\bin\Debug\TOCropViewController.dll" target="lib\Xamarin.iOS10\" />
+    <file src="..\..\lib\TOCropViewController.dll" target="lib\Xamarin.iOS10\" />
     <file src="..\..\lib\Zebble.ImageCropper.Android.*" target="lib\MonoAndroid10\" />
-    <file src="..\..\Binding\Binding_AndroidImageCropper\bin\Debug\Binding_AndroidImageCropper.dll" target="lib\MonoAndroid10\" />
+    <file src="..\..\lib\Binding_AndroidImageCropper.dll" target="lib\MonoAndroid10\" />
     <file src="..\..\lib\Zebble.ImageCropper.UWP.*" target="lib\UAP10\" />
   </files>
 </package>
