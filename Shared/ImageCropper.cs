@@ -73,7 +73,7 @@ namespace Zebble
             {
                 if (Settings == null) Settings = new ImageCropperSettings();
 
-                await CheckPermissions();
+                await Thread.UI.Run(() => CheckPermissions());
 
                 if (Settings.ImageFile == null)
                 {
