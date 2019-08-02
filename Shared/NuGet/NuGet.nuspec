@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Zebble.ImageCropper</id>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <title>ImageCropper for Zebble (Xamarin)</title>
     <projectUrl>https://github.com/Geeksltd/Zebble.ImageCropper</projectUrl>
     <iconUrl>https://raw.githubusercontent.com/Geeksltd/Zebble.ImageCropper/master/Shared/NuGet/Icon.png</iconUrl>
