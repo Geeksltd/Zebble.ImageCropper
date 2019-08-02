@@ -72,6 +72,9 @@ namespace Zebble
             try
             {
                 if (Settings == null) Settings = new ImageCropperSettings();
+
+                await CheckPermissions();
+
                 if (Settings.ImageFile == null)
                 {
                     switch (Settings.MediaSource)
@@ -110,13 +113,38 @@ namespace Zebble
                 else
                 {
                     await Task.Delay(100.Milliseconds());
-                    await DoShow();
+                    await Thread.UI.Run(() => DoShow());
                 }
             }
             catch (Exception ex)
             {
                 Device.Log.Error("[Error][ImageCropper]:" + ex);
             }
+        }
+
+        static async Task CheckPermissions()
+        {
+            if (!await Device.Media.IsCameraAvailable())
+            {
+                Device.Log.Error("No available camera was found on this device.");
+                return;
+            }
+            if (!Device.Media.SupportsTakingPhoto())
+            {
+                Device.Log.Error("Your device does not seem to support taking photos.");
+                return;
+            }
+            if (!await Device.Permission.Camera.IsRequestGranted())
+            {
+                await SuggestLaunchingSettings("Permission was denied to access the camera.");
+                return;
+            }
+        }
+
+        static async Task SuggestLaunchingSettings(string error)
+        {
+            var launchSettings = await Alert.Confirm(error + " Do you want to go to your device settings to enable it?");
+            if (launchSettings) await Device.OS.OpenSettings();
         }
     }
 }
