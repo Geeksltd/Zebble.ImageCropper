@@ -16,7 +16,10 @@ namespace Zebble
 
                 if (Settings.CropShape == ImageCropperSettings.CropShapeType.Oval)
                 {
-                    activityBuilder.SetCropShape(CropImageView.CropShape.Oval);
+                    if (Android.OS.Build.VERSION.SdkInt == Android.OS.BuildVersionCodes.P)
+                        activityBuilder.SetCropShape(CropImageView.CropShape.Rectangle);
+                    else
+                        activityBuilder.SetCropShape(CropImageView.CropShape.Oval);
                 }
                 else
                 {
@@ -56,7 +59,7 @@ namespace Zebble
 
                 await Task.Delay(100.Milliseconds());
                 if (resultCode == Result.Ok)
-                {                   
+                {
                     await OnSuccess.Raise(new System.IO.FileInfo(result.Uri.Path));
                 }
                 else if ((int)resultCode == (int)(CropImage.CropImageActivityResultErrorCode))

@@ -145,7 +145,7 @@
   <ItemGroup>
     <None Include="Jars\AboutJars.txt" />
     <None Include="Additions\AboutAdditions.txt" />
-    <EmbeddedJar Include="Jars\android-image-cropper-2.6.0.aar" />
+    <EmbeddedJar Include="Jars\android-image-cropper-2.8.0.aar" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
