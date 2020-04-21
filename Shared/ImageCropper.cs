@@ -83,7 +83,9 @@ namespace Zebble
 
                             if (Device.Media.SupportsPickingPhoto())
                             {
-                                await Device.Permissions.Request(Device.Permission.Albums);
+                                if ((await Device.Permissions.Check(Device.Permission.Albums)) != Device.PermissionResult.Granted)
+                                    await Device.Permissions.Request(Device.Permission.Albums);
+
                                 Settings.ImageFile = await Device.Media.PickPhoto(OnError.Throw);
                             }
                             else
@@ -94,7 +96,9 @@ namespace Zebble
 
                             if (await Device.Media.IsCameraAvailable())
                             {
-                                await Device.Permissions.Request(Device.Permission.Camera);
+                                if ((await Device.Permissions.Check(Device.Permission.Camera)) != Device.PermissionResult.Granted)
+                                    await Device.Permissions.Request(Device.Permission.Camera);
+
                                 Settings.ImageFile = await Device.Media.TakePhoto(Settings.MediaCaptureSettings, OnError.Throw);
                             }
                             else
@@ -134,9 +138,10 @@ namespace Zebble
                 Device.Log.Error("Your device does not seem to support taking photos.");
                 return;
             }
-            if (!await Device.Permission.Camera.IsRequestGranted())
+            if ((await Device.Permissions.Check(Device.Permission.Albums)) != Device.PermissionResult.Granted)
             {
-                await SuggestLaunchingSettings("Permission was denied to access the camera.");
+                if ((await Device.Permissions.Request(Device.Permission.Albums)) != Device.PermissionResult.Granted)
+                    await SuggestLaunchingSettings("Permission was denied to access the camera.");
                 return;
             }
         }
