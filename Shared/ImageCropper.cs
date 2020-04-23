@@ -29,6 +29,7 @@ namespace Zebble
     {
         public static readonly AsyncEvent<FileInfo> OnSuccess = new AsyncEvent<FileInfo>();
         public static readonly AsyncEvent<string> OnFailed = new AsyncEvent<string>();
+        public static readonly AsyncEvent OnCanceled = new AsyncEvent();
 
         public static ImageCropperSettings Settings { get; set; }
 
@@ -73,8 +74,6 @@ namespace Zebble
             {
                 if (Settings == null) Settings = new ImageCropperSettings();
 
-                await Thread.UI.Run(() => CheckPermissions());
-
                 if (Settings.ImageFile == null)
                 {
                     switch (Settings.MediaSource)
@@ -84,7 +83,11 @@ namespace Zebble
                             if (Device.Media.SupportsPickingPhoto())
                             {
                                 if ((await Device.Permissions.Check(Device.Permission.Albums)) != Device.PermissionResult.Granted)
-                                    await Device.Permissions.Request(Device.Permission.Albums);
+                                    if ((await Device.Permissions.Request(Device.Permission.Albums) != Device.PermissionResult.Granted))
+                                    {
+                                        await OnCanceled.Raise();
+                                        return;
+                                    }
 
                                 Settings.ImageFile = await Device.Media.PickPhoto(OnError.Throw);
                             }
@@ -97,7 +100,11 @@ namespace Zebble
                             if (await Device.Media.IsCameraAvailable())
                             {
                                 if ((await Device.Permissions.Check(Device.Permission.Camera)) != Device.PermissionResult.Granted)
-                                    await Device.Permissions.Request(Device.Permission.Camera);
+                                    if ((await Device.Permissions.Request(Device.Permission.Camera)) != Device.PermissionResult.Granted)
+                                    {
+                                        await OnCanceled.Raise();
+                                        return;
+                                    }
 
                                 Settings.ImageFile = await Device.Media.TakePhoto(Settings.MediaCaptureSettings, OnError.Throw);
                             }
@@ -112,7 +119,7 @@ namespace Zebble
 
                 if (Settings.ImageFile == null)
                 {
-                    await OnFailed.Raise("Please make sure the ImageFile or MediaSource property has correct value.");
+                    await OnCanceled.Raise();
                 }
                 else
                 {
@@ -123,26 +130,6 @@ namespace Zebble
             catch (Exception ex)
             {
                 Device.Log.Error("[Error][ImageCropper]:" + ex);
-            }
-        }
-
-        static async Task CheckPermissions()
-        {
-            if (!await Device.Media.IsCameraAvailable())
-            {
-                Device.Log.Error("No available camera was found on this device.");
-                return;
-            }
-            if (!Device.Media.SupportsTakingPhoto())
-            {
-                Device.Log.Error("Your device does not seem to support taking photos.");
-                return;
-            }
-            if ((await Device.Permissions.Check(Device.Permission.Albums)) != Device.PermissionResult.Granted)
-            {
-                if ((await Device.Permissions.Request(Device.Permission.Albums)) != Device.PermissionResult.Granted)
-                    await SuggestLaunchingSettings("Permission was denied to access the camera.");
-                return;
             }
         }
 

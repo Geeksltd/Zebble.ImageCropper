@@ -65,6 +65,9 @@ namespace Zebble
                 else if ((int)resultCode == (int)(CropImage.CropImageActivityResultErrorCode))
                 {
                     await OnFailed.Raise("[Error][ImageCropper] An error occured on android activity result!");
+                }else if(resultCode == Result.Canceled)
+                {
+                    await OnCanceled.Raise();
                 }
             }
         }

@@ -46,7 +46,7 @@ namespace Zebble
 
                 cropViewController.OnDidFinishCancelled = (cancelled) =>
                 {
-                    OnFailed.Raise("Canceled").GetAwaiter();
+                    OnCanceled.Raise().GetAwaiter();
                     UIApplication.SharedApplication.KeyWindow.RootViewController.DismissViewController(true, null);
                 };
 
