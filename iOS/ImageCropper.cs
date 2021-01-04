@@ -1,9 +1,10 @@
-﻿using Bind_TOCropViewController;
+﻿using TimOliver.TOCropViewController.Xamarin;
 using CoreGraphics;
 using Foundation;
 using System;
 using System.Threading.Tasks;
 using UIKit;
+using Olive;
 
 namespace Zebble
 {

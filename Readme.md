@@ -1,4 +1,4 @@
-[logo]: https://raw.githubusercontent.com/Geeksltd/ImageCropper/master/Shared/NuGet/Icon.png "Zebble.ImageCropper"
+ï»¿[logo]: https://raw.githubusercontent.com/Geeksltd/ImageCropper/master/icon.png "Zebble.ImageCropper"
 
 ## Zebble.ImageCropper
 
@@ -126,15 +126,15 @@ Then, create new file under `res/xml/file_paths.xml` and add below code to it.
     <external-files-path name="my_movies" path="Movies" />
 </paths>
 ```
- 
+ï¿½
 #### IOS:
 
-In IOS platform you need to set the permissions in the “Info.plist” file like below:
+In IOS platform you need to set the permissions in the ï¿½Info.plistï¿½ file like below:
 
 ```xml
 <plist version="1.0">
   <dict>
-    …
+    ï¿½
   	<key>NSCameraUsageDescription</key>
 	<string>Describe why this feature is required.</string>
 	<key>NSPhotoLibraryUsageDescription</key>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using Olive;
 
 namespace Zebble
 {
@@ -41,12 +42,12 @@ namespace Zebble
 
         public static Task Show(ImageCropperSettings.CropShapeType cropShapeType, ImageCropperSettings.Media mediaSource) => Show(0, 0, cropShapeType, mediaSource);
 
-        public static Task Show(int aspectRatioX, int aspecRatioY, ImageCropperSettings.CropShapeType cropShapeType, ImageCropperSettings.Media mediaSource)
+        public static Task Show(int aspectRatioX, int aspectRatioY, ImageCropperSettings.CropShapeType cropShapeType, ImageCropperSettings.Media mediaSource)
         {
             Settings = new ImageCropperSettings
             {
                 AspectRatioX = aspectRatioX,
-                AspectRatioY = aspecRatioY,
+                AspectRatioY = aspectRatioY,
                 CropShape = cropShapeType,
                 MediaSource = mediaSource,
                 MediaCaptureSettings = new Device.MediaCaptureSettings(),
@@ -112,7 +113,6 @@ namespace Zebble
                                 await OnFailed.Raise("No camera available.");
 
                             break;
-                        default: break;
                     }
 
                 }
@@ -124,7 +124,7 @@ namespace Zebble
                 else
                 {
                     await Task.Delay(100.Milliseconds());
-                    await Thread.UI.Run(() => DoShow());
+                    await Thread.UI.Run(DoShow);
                 }
             }
             catch (Exception ex)

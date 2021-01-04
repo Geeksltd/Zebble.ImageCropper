@@ -1,8 +1,9 @@
 ﻿using Android.App;
 using Android.Content;
-using Com.Theartofdev.Edmodo.Cropper;
 using System;
 using System.Threading.Tasks;
+using Com.Theartofdev.Edmodo.Cropper;
+using Olive;
 
 namespace Zebble
 {
@@ -12,7 +13,7 @@ namespace Zebble
         {
             try
             {
-                var activityBuilder = CropImage.Activity(Android.Net.Uri.FromFile(new Java.IO.File(Settings.ImageFile.FullName)));
+                var activityBuilder = CropImage.Builder(Android.Net.Uri.FromFile(new Java.IO.File(Settings.ImageFile.FullName)));
 
                 if (Settings.CropShape == ImageCropperSettings.CropShapeType.Oval)
                 {
@@ -64,7 +65,7 @@ namespace Zebble
                 }
                 else if ((int)resultCode == (int)(CropImage.CropImageActivityResultErrorCode))
                 {
-                    await OnFailed.Raise("[Error][ImageCropper] An error occured on android activity result!");
+                    await OnFailed.Raise("[Error][ImageCropper] An error occurred on android activity result!");
                 }else if(resultCode == Result.Canceled)
                 {
                     await OnCanceled.Raise();
