@@ -54,7 +54,7 @@
     <Compile Include="UWP\**\*.cs" />
   </ItemGroup>
   <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
-    <PackageReference Include="XamarinAndroidImageCropper " Version="2.5.1" />
+	<PackageReference Include="Karamunting.Android.ArthurHub.AndroidImageCropper" Version="2.8.0" />
     <Compile Include="Android\**\*.cs" />
   </ItemGroup>
   <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
