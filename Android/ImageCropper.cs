@@ -46,7 +46,7 @@ namespace Zebble
             }
             catch (Exception ex)
             {
-                Device.Log.Error(ex);
+                Log.For(typeof(ImageCropper)).Error(ex);
             }
 
             return Task.CompletedTask;

@@ -129,7 +129,7 @@ namespace Zebble
             }
             catch (Exception ex)
             {
-                Device.Log.Error("[Error][ImageCropper]:" + ex);
+                Log.For(typeof(ImageCropper)).Error(ex, "[Error][ImageCropper]");
             }
         }
 

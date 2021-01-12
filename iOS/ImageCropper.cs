@@ -61,7 +61,7 @@ namespace Zebble
             }
             catch (Exception ex)
             {
-                Device.Log.Error(ex);
+                Log.For(typeof(ImageCropper)).Error(ex);
             }
 
             return Task.CompletedTask;
@@ -81,7 +81,7 @@ namespace Zebble
             else
             {
                 var message = "NOT saved as " + jpgFilename + " because" + err.LocalizedDescription;
-                Device.Log.Error(message);
+                Log.For(typeof(ImageCropper)).Error(null, message);
                 await OnFailed.Raise(message);
             }
 
