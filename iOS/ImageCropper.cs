@@ -81,7 +81,7 @@ namespace Zebble
             else
             {
                 var message = "NOT saved as " + jpgFilename + " because" + err.LocalizedDescription;
-                Log.For(typeof(ImageCropper)).Error(null, message);
+                Log.For(typeof(ImageCropper)).Error(message);
                 await OnFailed.Raise(message);
             }
 
